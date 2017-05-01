@@ -1,0 +1,10 @@
+flask
+sqlalchemy
+psycopg2
+flask-bootstrap
+flask-wtf
+scipy
+sklearn
+numpy
+pandas
+haversine

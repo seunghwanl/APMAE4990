@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet' />
+
+  <body>
+    <h1>We Recommend {{ month }} {{ day }} {{ hour }}:{{ minute }} {{ am_pm }}</h1>
+    <div id='map' style='width: 700px; height: 600px;'></div>
+    <script>
+      mapboxgl.accessToken = '';
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v9',
+      center: [-74.0059, 40.7128],
+      zoom: 8
+      });
+
+      map.addControl(new mapboxgl.NavigationControl());
+
+      {% for result in top_results %}
+      var popup = new mapboxgl.Popup({closeOnClick: false})
+      .setLngLat([{{ result[2] }}, {{ result[1] }}])
+      .setHTML('<h4>{{ result[0] }} Latitude: {{ result[1] }} Lontitude: {{ result[2] }}</h4>')
+      .addTo(map);
+      {% endfor %}
+    </script>
+  </body>
+</html>
